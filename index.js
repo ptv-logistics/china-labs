@@ -2,7 +2,7 @@ if (!token) {
     alert('you need a token to run the sample!');
 }
 
-var cluster = '-hk';
+var cluster = '-hk-test';
 var itineraryLanguage = 'EN';
 var routingProfile = 'carfast';
 var alternativeRoutes = 0;
@@ -62,11 +62,10 @@ var map = L.map('map', {
 function getXMapBaseLayers(style, token, labelPane) {
     var attribution = '<a href="http://www.ptvgroup.com">PTV</a>, TOMTOM';
 
-    var background = L.tileLayer('https://china{s}' + cluster + '.cloud.ptvgroup.com/WMS/GetTile/xmap-' + 
+    var background = L.tileLayer('https://china' + cluster + '.cloud.ptvgroup.com/WMS/GetTile/xmap-' + 
         style + 'bg/{x}/{y}/{z}.png', {
         minZoom: 0, maxZoom: 19, opacity: 1.0,
-        attribution: attribution,
-        subdomains: '1234'
+        attribution: attribution
     });
 
     var foreground = new L.NonTiledLayer.WMS('https://china' + cluster + '.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
