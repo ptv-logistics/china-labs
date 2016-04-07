@@ -84,9 +84,9 @@ function getXMapBaseLayers(style, token, labelPane) {
 map._panes.labelPane = map._createPane('leaflet-top-pane', map.getPanes().shadowPane);
 
 var baseLayers = {
-    "PTV classic": getXMapBaseLayers('ajax', token, map._panes.labelPane).addTo(map),
+    "PTV classic": getXMapBaseLayers('ajax', token, map._panes.labelPane),
     "PTV gravelpit": getXMapBaseLayers('gravelpit-', token, map._panes.labelPane),
-    "PTV silkysand": getXMapBaseLayers('silkysand-', token, map._panes.labelPane),
+    "PTV silkysand": getXMapBaseLayers('silkysand-', token, map._panes.labelPane).addTo(map),
     "PTV sandbox": getXMapBaseLayers('sandbox-', token, map._panes.labelPane)
 };
 
@@ -113,16 +113,16 @@ var routingControl = L.Routing.control({
           // Shadow
           { color: 'black', opacity: 0.8, weight: 11 },
           // Outline
-          { color: 'green', opacity: 0.8, weight: 8 },
+          { color: '#888', opacity: 0.8, weight: 8 },
           // Center
-          { color: 'orange', opacity: 1, weight: 4 }
+          { color: '#aaa', opacity: 1, weight: 4 }
         ]
     },
     altLineOptions: {
         styles: [
             {color: 'grey', opacity: 0.8, weight: 11},
-            {color: 'lightgreen', opacity: 0.8, weight: 8},
-            {color: 'orange', opacity: 1, weight: 4}
+            {color: '#aaa', opacity: 0.8, weight: 8},
+            {color: 'white', opacity: 1, weight: 4}
         ],
 	},
     showAlternatives: true,	
@@ -141,7 +141,7 @@ var routingControl = L.Routing.control({
             return request;
         },
 		routesCalculated: function (alts, r) {
-			buildD3Animations(r, 3000, false);
+			buildD3Animations(r, 8000, false);
 		}
     }),
     routeWhileDragging: false,
