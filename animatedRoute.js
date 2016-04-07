@@ -1,4 +1,4 @@
-var buildD3Animations = function (alts, replaySpeed, doLoop) {
+var buildD3Animations = function (alts, speed, doLoop) {
     var d3Layer = new Array(3);
 
     if (!map.d3Layer) {
@@ -18,17 +18,14 @@ var buildD3Animations = function (alts, replaySpeed, doLoop) {
     else
         d3Layer = map.d3Layer;
 
-    // cancel pending animations
-    for (var i = 0; i < 3; i++) {
-        var animId = "anim" + i;
-        d3.select('#tr' + animId).transition().duration(0);
-    }
+	resetD3Animations();
 
-    if (map.timeOut) {
-        clearTimeout(map.timeOut);
-        map.timeOut = null;
-    }
-
+	if(!alts.length)
+		return;
+	
+	var refTime = alts[0].segments[alts[0].segments.length - 1].accTime;
+	var replaySpeed = refTime / speed * 1000;
+	
     if (doLoop) {
         var maxTime = -1;
         for (var i = 0; i < alts.length; i++) {
@@ -49,6 +46,19 @@ var buildD3Animations = function (alts, replaySpeed, doLoop) {
     for (var i = 0; i < alts.length; i++) {
         var svg = d3.select(d3Layer[i].getPathRoot());
         buildD3Animation(alts[i], i, d3Layer[i], svg, replaySpeed);
+    }
+}
+
+var resetD3Animations = function() {
+    // cancel pending animations
+    for (var i = 0; i < 3; i++) {
+        var animId = "anim" + i;
+        d3.select('#tr' + animId).transition().duration(0);
+    }
+
+    if (map.timeOut) {
+        clearTimeout(map.timeOut);
+        map.timeOut = null;
     }
 }
 

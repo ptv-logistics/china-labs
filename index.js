@@ -120,7 +120,7 @@ var routingControl = L.Routing.control({
     },
     altLineOptions: {
         styles: [
-            {color: 'black', opacity: 0.8, weight: 11},
+            {color: 'grey', opacity: 0.8, weight: 11},
             {color: 'lightgreen', opacity: 0.8, weight: 8},
             {color: 'orange', opacity: 1, weight: 4}
         ],
@@ -141,7 +141,7 @@ var routingControl = L.Routing.control({
             return request;
         },
 		routesCalculated: function (alts, r) {
-			buildD3Animations(r, 1000, false);
+			buildD3Animations(r, 3000, false);
 		}
     }),
     routeWhileDragging: false,
@@ -150,8 +150,10 @@ var routingControl = L.Routing.control({
 
 routingControl.on('routingerror', function (e) {
 	console.log(e.error.message);
-	buildD3Animations([], 1000, false);
+	resetD3Animations();
 });
+
+L.Routing.errorControl(routingControl).addTo(map);
 
 // update ui
 $('#languageSelect').val(itineraryLanguage);
@@ -160,11 +162,10 @@ $('#alternativeRoutes').val(alternativeRoutes);
 
 // add side bar
 var sidebar = L.control.sidebar('sidebar').addTo(map);
-sidebar.open('home');
 
 // update the routing params
 var updateParams = function (updateWayPoints) {
-	buildD3Animations([], 1000, false);
+	resetD3Animations();
 
     itineraryLanguage = $('#languageSelect option:selected').val();
     routingProfile = $('#routingProfile option:selected').val();
