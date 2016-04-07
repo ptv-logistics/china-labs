@@ -32,6 +32,6 @@ Supported options:
 * *numberOfAlternatives* - Number of alternatives to calculate. Default: 0
 * *beforeSend* - A delegate to manipulate the sent request. Default: null
 
-## animatedLine
+## animatedLine.js
 
 The sample also visualizes the relative speeds with a snake animation. This done based on the xRoute segment speeds with SVG+D3.
