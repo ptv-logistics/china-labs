@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>xServer internet routing demo</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
     <link rel="stylesheet" href="lib/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="lib/leaflet.iconlabel.css" />
     <link rel="stylesheet" href="lib/forkme.css" />
@@ -41,6 +41,32 @@
             margin: 4px;
             display: table-cell;
         }
+		
+        .travelMarker0 {
+            fill: yellow;
+            opacity: 0.75;
+        }
+
+        .travelMarker1 {
+            fill: #a00;
+            opacity: 0.75;
+        }
+
+        .travelMarker2 {
+            fill: black;
+            opacity: 0.5;
+        }
+
+        .waypoints {
+            fill: black;
+            opacity: 0;
+        }
+
+        .lineConnect {
+            fill: none;
+            stroke: black;
+            opacity: 1;
+        }		
     </style>
 </head>
 <body>
@@ -119,8 +145,9 @@
     </div>
     <div id="map" class="map">
     </div>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./lib/d3.min.js" charset="utf-8"></script>
     <script src="./lib/leaflet-routing-machine.js"></script>
     <script src="./lib/Control.Geocoder.js"></script>
     <script src="./lib/leaflet.iconlabel.js"></script>
@@ -128,6 +155,8 @@
     <script src="./lib/leaflet.contextmenu.js"></script>
     <script src="./lib/NonTiledLayer.js"></script>
     <script src="./lib/NonTiledLayer.WMS.js"></script>
+    <script src="./lib/d3layer.js"></script>
+    <script src="./animatedRoute.js"></script>
     <script src="./Control.Geocoder.ptv.js"></script>
     <script src="./routing-machine-ptv.js"></script>
     <script src="./token.js"></script>

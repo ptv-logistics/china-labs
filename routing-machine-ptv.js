@@ -1,7 +1,7 @@
 L.Routing.Ptv = L.Class.extend({
 	options: {
 		// xRoute url
-		serviceUrl: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/',
+		serviceUrl: 'https://api.cloud.ptvgroup.com/xroute/rs/XRoute/',
 		// token for xServer internet
 		token: '',
 		// indicates the back-end is a real xServer that supports heading informations
@@ -68,8 +68,10 @@ L.Routing.Ptv = L.Class.extend({
 			}, this),
 
 			function (xhr) {
-				console.log(xhr);
-				callback.call(context, xhr, null);
+					callback.call(context || callback, {
+						status: xhr.status,
+						message: xhr.responseJSON? xhr.responseJSON.errorMessage : xhr.responseText
+					});
 			}
 		);
 	},
@@ -90,8 +92,12 @@ L.Routing.Ptv = L.Class.extend({
 				waypointIndices: this._buildWaypointIndices(response.stations)
 			});
 		}
-
+		
 		callback.call(context, null, alts);
+		
+		if (typeof this.options.routesCalculated === "function") {
+            this.options.routesCalculated(alts, responses);
+        }	
 	},
 
 	_buildWaypointIndices: function (stations) {
@@ -154,15 +160,15 @@ L.Routing.Ptv = L.Class.extend({
 		}
 
 		for (var i = 0; i < manoeuvres.length; i++) {
-		    var manoeuvre = manoeuvres[i];
-		    instructions.push({
-		        distance: segments[manoeuvre.routeListSegmentIdx].accDist,
-		        exit: undefined,
-		        index: segments[manoeuvre.routeListSegmentIdx].firstPolyIdx,
-		        time: segments[manoeuvre.routeListSegmentIdx].accTime,
-		        type: this._drivingDirectionType(manoeuvre),
-		        text: manoeuvre.manoeuvreDesc
-		    });
+			var manoeuvre = manoeuvres[i];
+			instructions.push({
+			    distance: segments[manoeuvre.routeListSegmentIdx].accDist,
+			    exit: undefined,
+			    index: segments[manoeuvre.routeListSegmentIdx].firstPolyIdx,
+			    time: segments[manoeuvre.routeListSegmentIdx].accTime,
+			    type: this._drivingDirectionType(manoeuvre),
+			    text: manoeuvre.manoeuvreDesc
+			});
 		}
 
 		for (i = stations.length - 1; i >= 0; i--) {

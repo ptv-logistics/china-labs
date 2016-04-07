@@ -118,6 +118,14 @@ var routingControl = L.Routing.control({
           { color: 'orange', opacity: 1, weight: 4 }
         ]
     },
+    altLineOptions: {
+        styles: [
+            {color: 'black', opacity: 0.8, weight: 11},
+            {color: 'lightgreen', opacity: 0.8, weight: 8},
+            {color: 'orange', opacity: 1, weight: 4}
+        ],
+	},
+    showAlternatives: true,	
     router: L.Routing.ptv({
         serviceUrl: 'https://china' + cluster + '.cloud.ptvgroup.com/xroute/rs/XRoute/',
         token: token, 
@@ -131,14 +139,18 @@ var routingControl = L.Routing.control({
             request.callerContext.properties.push({ key: 'Profile', value: routingProfile });
 
             return request;
-        }
+        },
+		routesCalculated: function (alts, r) {
+			buildD3Animations(r, 1000, false);
+		}
     }),
     routeWhileDragging: false,
     routeDragInterval: 500
 }).addTo(map);
 
 routingControl.on('routingerror', function (e) {
-    alert(e.error.responseJSON.errorMessage);
+	console.log(e.error.message);
+	buildD3Animations([], 1000, false);
 });
 
 // update ui
@@ -152,6 +164,8 @@ sidebar.open('home');
 
 // update the routing params
 var updateParams = function (updateWayPoints) {
+	buildD3Animations([], 1000, false);
+
     itineraryLanguage = $('#languageSelect option:selected').val();
     routingProfile = $('#routingProfile option:selected').val();
     alternativeRoutes = $('#alternativeRoutes option:selected').val();
