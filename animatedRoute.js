@@ -168,7 +168,7 @@ var buildD3Animation = function (route, index, layer, svg, replaySpeed) {
     // This will be our traveling circle it will
     // travel along our path
     var marker = g.append("circle")
-        .attr("r", (index == 0) ? 12 : 10)
+        .attr("r", 10)
         .attr("id", "marker" + index)
         .attr("class", "travelMarker" + index);
 
