@@ -34,4 +34,4 @@ Supported options:
 
 ## animatedLine.js
 
-The sample also visualizes the relative speeds with a snake animation. This done based on the xRoute segment speeds with SVG+D3.
+The sample also visualizes the relative speeds with a snake animation. This is done with SVG+D3 based on the xRoute segment speeds.
