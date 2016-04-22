@@ -60,7 +60,7 @@ var map = L.map('map', {
 
 // returns a layer group for xmap back- and foreground layers
 function getXMapBaseLayers(style, token, labelPane) {
-    var attribution = '<a href="http://www.ptvgroup.com">PTV</a>, TOMTOM';
+    var attribution = '<a href="http://www.ptvgroup.com">PTV</a>, eMapgo';
 
     var background = L.tileLayer('https://china' + cluster + '.cloud.ptvgroup.com/WMS/GetTile/xmap-' + 
         style + 'bg/{x}/{y}/{z}.png', {
