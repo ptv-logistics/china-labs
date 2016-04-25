@@ -2,7 +2,7 @@ if (!token) {
    token = prompt("Please enter your xServer internet token");
 }
 
-var cluster = '-hk-test';
+var cluster = '-cn-test';
 var itineraryLanguage = 'EN';
 var routingProfile = 'carfast';
 var alternativeRoutes = 0;
