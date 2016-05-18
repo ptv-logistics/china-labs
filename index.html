@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="lib/leaflet-sidebar.min.css" />
     <link rel="stylesheet" href="lib/leaflet.contextmenu.css">
     <link rel="stylesheet" href="index.css" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <style>
         body {
             padding: 0;
@@ -70,6 +71,33 @@
     </style>
 </head>
 <body>
+	
+	<!-- Notifications -->
+        <div id="Auth" title="Authentication" class="initiallyHidden">
+            <h4>
+                Please enter your xServer internet token:
+            </h4>
+				
+            <p>
+				<input id="tokenInput" type="text" value="">
+                <input type="submit" value="Submit" onclick="handleAuth()">
+				<text style="color:red;font-weight:bold" id="error"/>
+            </p>
+            <p>
+                Your don't have a token?
+            </p>
+			<p>
+               <a href="http://xserver.ptvgroup.com/en-uk/products/ptv-xserver-internet/test/" target="_blank">Test now for free!</a> (60 days PTV xServer internet)
+            </p>
+			<br>
+            <p>
+                <center>
+                    <a href="http://xserver.ptvgroup.com/en-uk/products/ptv-xserver-internet/" target="_blank"><img src="./doc/images/ptv_logo.png" border="0"></a>
+                </center>
+            </p>
+        </div>
+
+
     <div class="github-fork-ribbon-wrapper right-bottom">
         <div class="github-fork-ribbon">
             <a href="https://github.com/ptv-logistics/china-labs/">Fork me on GitHub</a>
@@ -179,6 +207,7 @@
     </div>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
     <script src="./lib/d3.min.js" charset="utf-8"></script>
     <script src="./lib/leaflet-routing-machine.js"></script>
     <script src="./lib/Control.Geocoder.js"></script>
