@@ -7,24 +7,30 @@ if (!token) {
 
 function handleAuth(elmnt,clr) {
     token = document.getElementById("tokenInput").value;
-	if (connectionTest(token)) {
-		$('#Auth').dialog('close');
-		init();
-	} else {
-		document.getElementById("error").innerHTML = "Invalid token";
-	}
+	
+	var url = 'https://china' + cluster + '.cloud.ptvgroup.com/WMS/WMS?service=WMS&request=GetMap&version=1.1.1&layers=xmap-gravelpit-fg&styles=&format=image%2Fpng&transparent=true&srs=EPSG%3A3857&width=600&height=400&bbox=933672,6275665,937081,6277938&xtok=' + token;
+	document.getElementById("error").innerHTML = "Loading...";
+	httpAsync(url, function(res) {
+		if (res == 200) {
+			$('#Auth').dialog('close');
+			init();
+		} else {
+			document.getElementById("error").innerHTML = "Invalid token";
+		}
+	});
 }
 
-function connectionTest(token) {
-	var url = 'https://china' + cluster + '.cloud.ptvgroup.com/WMS/WMS?service=WMS&request=GetMap&version=1.1.1&layers=xmap-gravelpit-fg&styles=&format=image%2Fpng&transparent=true&srs=EPSG%3A3857&width=600&height=400&bbox=933672,6275665,937081,6277938&xtok=' + token;
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open( "GET", url, false );
-		xmlHttp.send(null);
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			return true;
-		else
-			return false;
+//run a request
+function httpAsync(theUrl, callback) {
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4)
+            callback(req.status);
+    }
+    req.open("GET", theUrl, true);
+    req.send(null);
 }
+
 
 function init() {
 	var itineraryLanguage = 'EN';
