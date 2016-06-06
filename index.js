@@ -3,6 +3,8 @@ var cluster = '-cn-test';
 //handle authentication 
 if (!token) {
 	var test = $('#Auth').dialog({ minWidth: 600, minHeight: 400 });
+} else {
+    init();
 }
 
 function handleAuth(elmnt,clr) {
