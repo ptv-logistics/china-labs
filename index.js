@@ -105,15 +105,16 @@ function init() {
 			layers: 'xmap-' + style + 'fg',
 			format: 'image/png', transparent: true,
 			attribution: attribution,
-			pane: labelPane
+			pane: 'labels'
 		});
 
 		return L.layerGroup([background, foreground]);
 	}
 
-	// create a new leaflet pane for the label layer
-	// see http://bl.ocks.org/rsudekum/5431771
-	map._panes.labelPane = map._createPane('leaflet-top-pane', map.getPanes().shadowPane);
+// create a separate pane for the xmap labels, so they are displayed on top of the route line
+map.createPane('labels');
+map.getPane('labels').style.zIndex = 500;
+map.getPane('labels').style.pointerEvents = 'none';
 
 	var baseLayers = {
 		"PTV classic": getXMapBaseLayers('ajax', token, map._panes.labelPane),
@@ -128,12 +129,14 @@ function init() {
 	var routingControl = L.Routing.control({
 		plan: L.Routing.plan({},
 		{
-			createMarker: function (i, wp) {
-				return L.marker(wp.latLng, {
-					draggable: true,
-					icon: new L.Icon.Label.Default({ labelText: String.fromCharCode(65 + i) })
-				});
-			},
+    	    createMarker: function (i, wp) {
+  	          return L.marker(wp.latLng, {
+        	        draggable: true,
+    	            icon: L.icon.glyph({
+	                    glyph: String.fromCharCode(65 + i)
+        	        })
+    	        });
+	        },
 			geocoder: L.Control.Geocoder.ptv({
 				serviceUrl: 'https://china' + cluster + '.cloud.ptvgroup.com/xlocate/rs/XLocate/',
 				token: token
@@ -173,7 +176,7 @@ function init() {
 				return request;
 			},
 			routesCalculated: function (alts, r) {
-				buildD3Animations(r, 8000, false);
+				buildD3Animations(map, r, 8000, false);
 			}
 		}),
 		routeWhileDragging: false,
