@@ -68,12 +68,16 @@
             stroke: black;
             opacity: 1;
         }				
+        .invisible {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 	
 	<!-- Notifications -->
-        <div id="Auth" title="Authentication" class="initiallyHidden">
+        <div id="Auth" title="Authentication" class="invisible">
             <h4>
                 Please enter your xServer internet token:
             </h4>
@@ -203,7 +207,7 @@
             </div>
         </div>
     </div>
-    <div id="map" class="map">
+    <div id="map" class="sidebar-map">
     </div>
     <script src="https://unpkg.com/jquery@1.11.1/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/jqueryui@1.11.1/jquery-ui.min.js"></script>

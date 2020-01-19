@@ -1,5 +1,18 @@
 var cluster = '-cn-test';
 
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
+if($.urlParam('xtok'))
+	token = $.urlParam('xtok');
+
 //handle authentication 
 if (!token) {
 	var test = $('#Auth').dialog({ minWidth: 600, minHeight: 400 });
@@ -34,8 +47,7 @@ function httpAsync(theUrl, callback) {
 }
 
 
-function init() {
-	var itineraryLanguage = 'EN';
+function init() {	var itineraryLanguage = 'EN';
 	var routingProfile = 'carfast';
 	var alternativeRoutes = 0;
 
@@ -44,6 +56,12 @@ function init() {
 		{ "latitude": 31.22942, "longitude": 121.47457 },
 		{ "latitude": 39.92132, "longitude": 116.46614 }
 	];
+
+	if($.urlParam('profile')) routingProfile = $.urlParam('profile');
+	if($.urlParam('lat1')) coordinates[0].latitude = parseFloat($.urlParam('lat1'));
+	if($.urlParam('lng1')) coordinates[0].longitude = parseFloat($.urlParam('lng1'));
+	if($.urlParam('lat2')) coordinates[1].latitude = parseFloat($.urlParam('lat2'));
+	if($.urlParam('lng2')) coordinates[1].longitude = parseFloat($.urlParam('lng2'));
 
 	// xServer-cn uses a special datum for china. You have to transform your coordinates before calculating the route.
 	$.ajax({
@@ -185,7 +203,6 @@ map.getPane('labels').style.pointerEvents = 'none';
 
 	routingControl.on('routingerror', function (e) {
 		console.log(e.error.message);
-		resetD3Animations();
 	});
 
 	L.Routing.errorControl(routingControl).addTo(map);
@@ -199,9 +216,7 @@ map.getPane('labels').style.pointerEvents = 'none';
 	var sidebar = L.control.sidebar('sidebar').addTo(map);
 
 	// update the routing params
-	var updateParams = function (updateWayPoints) {
-		resetD3Animations();
-
+	updateParams = function (updateWayPoints) {
 		itineraryLanguage = $('#languageSelect option:selected').val();
 		routingProfile = $('#routingProfile option:selected').val();
 		alternativeRoutes = $('#alternativeRoutes option:selected').val();
