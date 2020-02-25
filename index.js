@@ -1,4 +1,4 @@
-var cluster = '-cn-test';
+var cluster = '-test';
 
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -23,7 +23,7 @@ if (!token) {
 function handleAuth(elmnt,clr) {
     token = document.getElementById("tokenInput").value;
 	
-	var url = 'https://china' + cluster + '.cloud.ptvgroup.com/WMS/WMS?service=WMS&request=GetMap&version=1.1.1&layers=xmap-gravelpit-fg&styles=&format=image%2Fpng&transparent=true&srs=EPSG%3A3857&width=600&height=400&bbox=933672,6275665,937081,6277938&xtok=' + token;
+	var url = 'https://china' + cluster + '.ptvgroup.cn/WMS/WMS?service=WMS&request=GetMap&version=1.1.1&layers=xmap-gravelpit-fg&styles=&format=image%2Fpng&transparent=true&srs=EPSG%3A3857&width=600&height=400&bbox=933672,6275665,937081,6277938&xtok=' + token;
 	document.getElementById("error").innerHTML = "Loading...";
 	httpAsync(url, function(res) {
 		if (res == 200) {
@@ -65,7 +65,7 @@ function init() {	var itineraryLanguage = 'EN';
 
 	// xServer-cn uses a special datum for china. You have to transform your coordinates before calculating the route.
 	$.ajax({
-		url: 'https://china' + cluster + '.cloud.ptvgroup.com/CoordinateTransformation/shift',
+		url: 'https://china' + cluster + '.ptvgroup.cn/CoordinateTransformation/shift',
 		type: 'POST',
 		data: JSON.stringify(coordinates),
 		contentType: "application/json",
@@ -112,13 +112,14 @@ function init() {	var itineraryLanguage = 'EN';
 	function getXMapBaseLayers(style, token, labelPane) {
 		var attribution = '<a href="http://www.ptvgroup.com">PTV</a>, eMapgo';
 
-		var background = L.tileLayer('https://china' + cluster + '.cloud.ptvgroup.com/WMS/GetTile/xmap-' + 
+		var background = L.tileLayer('https://china{s}' + cluster + '.ptvgroup.cn/WMS/GetTile/xmap-' + 
 			style + 'bg/{x}/{y}/{z}.png', {
 			minZoom: 0, maxZoom: 19, opacity: 1.0,
-			attribution: attribution
+			attribution: attribution,
+			subdomains: '1234'
 		});
 
-		var foreground = new L.NonTiledLayer.WMS('https://china' + cluster + '.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
+		var foreground = new L.NonTiledLayer.WMS('https://china' + cluster + '.ptvgroup.cn/WMS/WMS?xtok=' + token, {
 			minZoom: 0, maxZoom: 19, opacity: 1.0,
 			layers: 'xmap-' + style + 'fg',
 			format: 'image/png', transparent: true,
@@ -156,7 +157,7 @@ map.getPane('labels').style.pointerEvents = 'none';
     	        });
 	        },
 			geocoder: L.Control.Geocoder.ptv({
-				serviceUrl: 'https://china' + cluster + '.cloud.ptvgroup.com/xlocate/rs/XLocate/',
+				serviceUrl: 'https://china' + cluster + '.ptvgroup.cn/xlocate/rs/XLocate/',
 				token: token
 			}),
 			reverseWaypoints: true
@@ -180,7 +181,7 @@ map.getPane('labels').style.pointerEvents = 'none';
 		},
 		showAlternatives: true,	
 		router: L.Routing.ptv({
-			serviceUrl: 'https://china' + cluster + '.cloud.ptvgroup.com/xroute/rs/XRoute/',
+			serviceUrl: 'https://china' + cluster + '.ptvgroup.cn/xroute/rs/XRoute/',
 			token: token, 
 			numberOfAlternatives: alternativeRoutes,
 			beforeSend: function (request) {

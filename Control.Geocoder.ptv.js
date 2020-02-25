@@ -1,3 +1,5 @@
+if(!L.Control.Geocoder) {L.Control.Geocoder = {};}
+
 L.Control.Geocoder.Ptv = L.Class.extend({
 	options: {
 		// xLocate url
@@ -51,6 +53,11 @@ L.Control.Geocoder.Ptv = L.Class.extend({
 		else {
 			return street + ', ' + city;
 		}
+	},
+
+	// using standard xLocate geocoding as suggest/autocompletion
+	suggest: function(query, cb, context) {
+		return this.geocode(query, cb, context);
 	},
 
 	geocode: function (query, cb, context) {
