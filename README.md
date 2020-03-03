@@ -1,7 +1,7 @@
 # leaflet-routing-machine for PTV xServer
 This project shows how to use https://www.liedman.net/leaflet-routing-machine/ with PTV xServer and china map.
 
-Demo: http://ptv-logistics.github.io/china-labs/
+Demo: https://ptv-logistics.github.io/china-labs/
 
 To use this code, you need an installed PTV xRoute/xLocate/xMap or an xServer internet subscription. Go to https://xserver.ptvgroup.com/en-uk/products/ptv-xserver-internet/test/ to get a trial token.
 
