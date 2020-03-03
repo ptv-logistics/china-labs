@@ -7,7 +7,7 @@ To use this code, you need an installed PTV xRoute/xLocate/xMap or an xServer in
 
 ## Coordinate Transformation:
 Chinese legislation requires that all digital map data is stored in China in a specific coordinate system. To transform your coordinates to this system, we are providing a coordinate transformation service from WGS84 to chinese proprietary coordinate system. You will find further informations in this following documentation:
-https://china.cloud.ptvgroup.com/CoordinateTransformation
+https://china.ptvgroup.cn/CoordinateTransformation
 
 The additional classes required to use PTV xServer with leaflet-routing-machine:
 
