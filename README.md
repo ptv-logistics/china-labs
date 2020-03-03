@@ -18,7 +18,7 @@ Provides an implementation to support single-tile WMS layers for Leaflet, simila
 The PTV xLocate implementation of the geocoder for routing-machine.
 
 Supported options:
-* *serviceUrl* - The url for PTV xLocate. Default: 'https://china.cloud.ptvgroup.com/xlocate/rs/XLocate/'
+* *serviceUrl* - The url for PTV xLocate. 
 * *token* - The token for xServer internet access. Default: ''
 * *fixedCountry* - A country that can be predefined for single-field search
 
@@ -26,7 +26,7 @@ Supported options:
 The PTV xRoute implementation of the router for routing-machine.
 
 Supported options:
-* *serviceUrl* - The url for PTV xRoute. Default: 'https://china.cloud.ptvgroup.com/xroute/rs/XRoute/'
+* *serviceUrl* - The url for PTV xRoute.
 * *token* - The token for xServer internet access. Default: ''
 * *supportsHeadings* - indicates the back-end is a real xServer that supports heading informations. Default: true
 * *numberOfAlternatives* - Number of alternatives to calculate. Default: 0
