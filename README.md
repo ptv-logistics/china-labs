@@ -1,5 +1,5 @@
 # leaflet-routing-machine for PTV xServer
-This project shows how to use http://www.liedman.net/leaflet-routing-machine/ with PTV xServer and china map.
+This project shows how to use https://www.liedman.net/leaflet-routing-machine/ with PTV xServer and china map.
 
 Demo: http://ptv-logistics.github.io/china-labs/
 
